@@ -2,9 +2,9 @@
 
 > The Aim
 
-- to enable create a `.gitignore` file and a `.npmignore` file 
-- to ensure i don't make a mistake of push secrets to github
-- just expanding my skill level
+- to enable create a `.gitignore` file and a `.npmignore` file. 
+- to ensure i don't make a mistake of push secrets to github.
+- just expanding my skill level.
 
 ## INSTALLATION
 
