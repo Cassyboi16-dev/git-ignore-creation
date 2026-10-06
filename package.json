@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "bin": {
     "solve": "./index.js"
   },
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Cassyboi16-dev/git-ignore-creation/issues"
   },
-  "homepage": "https://github.com/Cassyboi16-dev/git-ignore-creation#readme"
+  "homepage": "https://github.com/Cassyboi16-dev/git-ignore-creation#readme",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
 }
