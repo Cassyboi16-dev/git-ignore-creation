@@ -9,7 +9,7 @@
 ## INSTALLATION
 
 ```bash
-  npm i -g git-ignore-creation
+  npm i -g ignore-creation
 ```
 ### USAGE 
 
