@@ -14,7 +14,7 @@
 ### USAGE 
 1. How to run it in it's own terminal interface
 ```bash
-start
+start-mgr
 ```
 
 2. How to run it normally
