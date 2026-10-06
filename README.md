@@ -12,7 +12,12 @@
   npm i -g ignore-creation
 ```
 ### USAGE 
+1. How to run it in it's own terminal interface
+```bash
+start
+```
 
+2. How to run it normally
 
 - To create .gitignore file
 ```bash

@@ -1,11 +1,12 @@
 {
   "name": "ignore-creation",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "solve": "./index.js"
+    "solve": "./index.js",
+    "start": "./run.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/Cassyboi16-dev/git-ignore-creation#readme",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "figlet": "^1.12.0"
   }
 }
