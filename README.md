@@ -17,6 +17,9 @@
 start-mgr
 ```
 
+> Note once you run the command above all commands below will be the same excluding the `solve` command.
+
+
 2. How to run it normally
 
 - To create .gitignore file
@@ -43,12 +46,31 @@ solve rm-npmignore
 
 - To remove any file
 ```bash
-solve rm name-of-file
+solve rm <name-of-file>
 ```
 - To add any file
 ```bash
-solve mk name of file
+solve mk <name of file>
 ```
+
+- To add any file with contents
+```bash
+solve mk <name of file> -ct content
+```
+* To clear the terminal without exiting
+```bash
+clear
+```
+or Ctrl + L
+* Then to exit
+
+```bash
+exit
+```
+or 
+
+Ctrl + C
+
 > Have fun with this tool it took a couple of ours so do me a favour and star this repo
 
 

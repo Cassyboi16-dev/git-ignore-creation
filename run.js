@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import chalk from "chalk";
 import figlet from "figlet";
 import { createInterface } from "node:readline/promises";
+import readline from "node:readline"; // Imported standard readline to safely handle raw keypress events
 import { stdin as input, stdout as output } from "node:process";
 
 // Custom hex colors
@@ -27,6 +28,12 @@ async function processCommand(inputLine) {
   if (clue === 'exit') {
     console.log(warning("Exiting interactive manager. Goodbye!"));
     process.exit(0);
+  }
+
+  // Handle explicit clear command typed by the user
+  if (clue === 'clear') {
+    console.clear();
+    return;
   }
 
   if (clue === 'ignore') {
@@ -89,23 +96,39 @@ async function processCommand(inputLine) {
   } else {
     // Graceful error termination handling invalid options
     console.error(error1(`Error: Unknown command "${clue}".`));
-    console.error(warning("Available commands: ignore, gitignore, npmignore, git-rm, rm-gitignore, rm-npmignore, rm [filename], mk [filename], exit"));
+    console.error(warning("Available commands: ignore, gitignore, npmignore, git-rm, rm-gitignore, rm-npmignore, rm [filename], mk [filename], clear, exit"));
   }
 }
 
 async function startInteractiveShell() {
   // 1. Render the Figlet text banner synchronously on startup
   console.log(bannerColor(figlet.textSync("IGNORE MGR", { horizontalLayout: "default" })));
-  console.log(chalk.dim("Type your command below. Type 'exit' to quit.\n"));
+  console.log(chalk.dim("Type your command below. Type 'exit' to quit. Press Ctrl+L to clear screen.\n"));
 
   // 2. Initialize Readline Interface
   const rl = createInterface({ input, output });
 
-  // 3. Keep running the prompt indefinitely
+  // 3. Listen to raw keypresses simultaneously to process Ctrl+L cleanly inside readline
+  readline.emitKeypressEvents(process.stdin);
+  process.stdin.on('keypress', (str, key) => {
+    if (key.ctrl && key.name === 'l') {
+      console.clear();
+      // Force write the prompt string again so it doesn't leave the line empty after clearing
+      process.stdout.write(chalk.bold.cyan("ignore-mgr > ") + rl.line);
+    }
+  });
+
+  // 4. Keep running the prompt indefinitely
   while (true) {
-    const inputLine = await rl.question(chalk.bold.cyan("ignore-mgr > "));
-    await processCommand(inputLine);
-    console.log(""); // Empty line for clean visual padding between actions
+    try {
+      const inputLine = await rl.question(chalk.bold.cyan("ignore-mgr > "));
+      await processCommand(inputLine);
+      console.log(""); // Empty line for clean visual padding between actions
+    } catch (err) {
+      // Catch sudden interupt breaks to gracefully exit
+      console.log(warning("\nExiting interactive manager. Goodbye!"));
+      process.exit(0);
+    }
   }
 }
 
