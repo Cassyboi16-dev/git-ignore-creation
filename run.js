@@ -11,7 +11,7 @@ import { stdin as input, stdout as output } from "node:process";
 const error1 = chalk.hex('#ff0000');
 const warning = chalk.hex('#FA5019');
 const success = chalk.hex('#00FA8C');
-const bannerColor = chalk.hex('#00BFFF'); // Cool Cyan for the banner
+const bannerColor = chalk.hex('#ff5500'); 
 
 const file1 = ".gitignore";
 const file2 = ".npmignore";
@@ -80,10 +80,12 @@ async function processCommand(inputLine) {
       console.error(error1("Error: Please specify a file name. Example: mk dummy.txt"));
       return; 
     }
+
+    const nodeFlag = "ct" ? "wx" : "w"
     
     try {
       // Added 'wx' flag back here to guarantee EEXIST error catches duplicate files
-      await fs.writeFile(targetFile, "console.log('Hello user')", { flag: "wx" });
+      await fs.writeFile(targetFile, { flag: nodeFlag });
       console.log(success(`${targetFile} successfully created`));
     } catch (error) {
       if (error.code === 'EEXIST') {
@@ -94,7 +96,7 @@ async function processCommand(inputLine) {
     }
 
   } else {
-    // Graceful error termination handling invalid options
+   
     console.error(error1(`Error: Unknown command "${clue}".`));
     console.error(warning("Available commands: ignore, gitignore, npmignore, git-rm, rm-gitignore, rm-npmignore, rm [filename], mk [filename], clear, exit"));
   }
@@ -102,7 +104,7 @@ async function processCommand(inputLine) {
 
 async function startInteractiveShell() {
   // 1. Render the Figlet text banner synchronously on startup
-  console.log(bannerColor(figlet.textSync("IGNORE MGR", { horizontalLayout: "default" })));
+  console.log(bannerColor(figlet.textSync("IGNORE MGR", { horizontalLayout: "universal smushing" })));
   console.log(chalk.dim("Type your command below. Type 'exit' to quit. Press Ctrl+L to clear screen.\n"));
 
   // 2. Initialize Readline Interface

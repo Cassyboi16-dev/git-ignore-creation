@@ -67,7 +67,7 @@ async function ignoreFile(clue) {
     const nodeFlag = flag === "ct" ? "wx" : "w";
 
     try {
-      await fs.writeFile(file, "console.log('Hello user')", { flag: nodeFlag });
+      await fs.writeFile(file, { flag: nodeFlag });
       console.log(success(`${file} successfully created`));
     } catch (error) {
       if (error.code === 'EEXIST') {
