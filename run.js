@@ -76,16 +76,19 @@ async function processCommand(inputLine) {
     }
 
   } else if (clue === "mk") { 
+    const file = process.argv[3];
+    const flag = "ct";
+
     if (!targetFile) {
       console.error(error1("Error: Please specify a file name. Example: mk dummy.txt"));
       return; 
     }
 
-    const nodeFlag = "ct" ? "wx" : "w"
+    const nodeFlag = flag === "ct" ? "wx" : "w";
     
     try {
       // Added 'wx' flag back here to guarantee EEXIST error catches duplicate files
-      await fs.writeFile(targetFile, { flag: nodeFlag });
+      await fs.writeFile(targetFile, " ", { flag: nodeFlag });
       console.log(success(`${targetFile} successfully created`));
     } catch (error) {
       if (error.code === 'EEXIST') {
