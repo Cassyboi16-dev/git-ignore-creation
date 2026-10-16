@@ -71,6 +71,16 @@ or
 
 Ctrl + C
 
+
+
+This is how the internal terminal would look like
+
+<img
+src="/Public/Terminal.png"
+width="200"
+alt="TUI Interface"
+/>
+
 > Have fun with this tool it took a couple of ours so do me a favour and star this repo
 
 
